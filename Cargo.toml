@@ -1,0 +1,11 @@
+[package]
+name = "tuin"
+version = "0.1.0"
+edition = "2024"
+description = "An object-oriented framework for building TUIs."
+
+[build-dependencies]
+cc = "1.2.65"
+
+[dependencies]
+termion = "4.0.6"
