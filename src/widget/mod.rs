@@ -3,4 +3,6 @@
 //!that.
 
 mod types;
+mod widgets;
 pub use types::*;
+pub use widgets::*;
