@@ -3,14 +3,44 @@
 
 use crate::style::ansi::Ansi;
 
-#[derive(Copy, Clone)]
-#[repr(u8)]
-pub enum Color {
-    Reset,
-    
+///Represents the background or the foreground of the terminal.
+pub enum Layer {
+    Foreground(Vec<Box<dyn Ansi>>),
+    Background(Vec<Box<dyn Ansi>>),
+}
+
+///Represents ANSI colors. The u32 values are foreground codes; to get background codes add 10.
+///Ironically, it doesn't implement Ansi. Instead, it's used by other types to store color.
+#[derive(Copy, Clone, PartialEq, Eq)]
+#[repr(u32)]
+pub enum AnsiColor {
+    Reset = 0,
+    Black = 30,
+    Red = 31,
+    Green = 32,
+    Yellow = 33,
+    Blue = 34,
+    Magenta = 35,
+    Cyan = 36,
+    White = 37,
+    Default = 39,
+}
+
+impl AnsiColor {
+    pub fn code(&self, layer: Layer) -> u32 {
+        if self == &AnsiColor::Reset {
+            return 0;
+        }
+
+        match layer {
+            Layer::Foreground(_) => *self as u32,
+            Layer::Background(_) => *self as u32 + 10,
+        }
+    }
 }
 
 ///Controls whether text is normal, bold, or dim
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Brightness {
     Bold,
     Dim,
@@ -28,6 +58,7 @@ impl Ansi for Brightness {
 }
 
 ///Controls whether text is italicized or regular
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Italic {
     Italicized,
     Reset,
@@ -43,6 +74,7 @@ impl Ansi for Italic {
 }
 
 ///Controls whether text is underlined
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Underline {
     Underlined,
     Reset,
@@ -58,6 +90,7 @@ impl Ansi for Underline {
 }
 
 ///Controls whether text blinks
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Blink {
     Blinking,
     Reset,
@@ -73,6 +106,7 @@ impl Ansi for Blink {
 }
 
 ///Controls whether colors are inverted
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Reverse {
     Reversed,
     Reset,
@@ -88,6 +122,7 @@ impl Ansi for Reverse {
 }
 
 ///Controls whether text is showing
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Hide {
     Hidden,
     Reset,
@@ -103,6 +138,7 @@ impl Ansi for Hide {
 }
 
 ///Controls whether text is struck through
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Strikethrough {
     Struck,
     Reset,

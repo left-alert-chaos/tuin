@@ -5,5 +5,5 @@
 mod widget;
 mod text;
 mod ansi;
-pub use widget::*;
 pub use text::*;
+pub use ansi::Ansi;
