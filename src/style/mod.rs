@@ -3,6 +3,7 @@
 //!ANSI codes.
 
 mod widget;
-mod color;
+mod text;
+mod ansi;
 pub use widget::*;
-pub use color::*;
+pub use text::*;
