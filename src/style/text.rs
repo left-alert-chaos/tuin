@@ -4,17 +4,18 @@
 use crate::style::ansi::Ansi;
 
 ///Represents the background or the foreground of the terminal.
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Layer {
-    Foreground(Vec<Box<dyn Ansi>>),
-    Background(Vec<Box<dyn Ansi>>),
+    #[default] Foreground,
+    Background,
 }
 
 ///Represents ANSI colors. The u32 values are foreground codes; to get background codes add 10.
 ///Ironically, it doesn't implement Ansi. Instead, it's used by other types to store color.
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 #[repr(u32)]
 pub enum AnsiColor {
-    Reset = 0,
+    #[default] Reset = 0,
     Black = 30,
     Red = 31,
     Green = 32,
@@ -33,18 +34,18 @@ impl AnsiColor {
         }
 
         match layer {
-            Layer::Foreground(_) => *self as u32,
-            Layer::Background(_) => *self as u32 + 10,
+            Layer::Foreground => *self as u32,
+            Layer::Background => *self as u32 + 10,
         }
     }
 }
 
 ///Controls whether text is normal, bold, or dim
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Brightness {
     Bold,
     Dim,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Brightness {
@@ -58,10 +59,10 @@ impl Ansi for Brightness {
 }
 
 ///Controls whether text is italicized or regular
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Italic {
     Italicized,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Italic {
@@ -74,10 +75,10 @@ impl Ansi for Italic {
 }
 
 ///Controls whether text is underlined
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Underline {
     Underlined,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Underline {
@@ -90,10 +91,10 @@ impl Ansi for Underline {
 }
 
 ///Controls whether text blinks
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Blink {
     Blinking,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Blink {
@@ -106,10 +107,10 @@ impl Ansi for Blink {
 }
 
 ///Controls whether colors are inverted
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Reverse {
     Reversed,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Reverse {
@@ -122,10 +123,10 @@ impl Ansi for Reverse {
 }
 
 ///Controls whether text is showing
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Hide {
     Hidden,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Hide {
@@ -138,10 +139,10 @@ impl Ansi for Hide {
 }
 
 ///Controls whether text is struck through
-#[derive(Copy, Clone, PartialEq, Eq)]
+#[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Strikethrough {
     Struck,
-    Reset,
+    #[default] Reset,
 }
 
 impl Ansi for Strikethrough {
