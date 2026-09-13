@@ -3,7 +3,6 @@
 
 use crate::style::{Ansi, Layer};
 
-
 ///Store information about a widget's styling.
 pub struct Surface {
     pub(crate) text: Layer,

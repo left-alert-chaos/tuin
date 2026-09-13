@@ -6,7 +6,8 @@ use crate::style::ansi::Ansi;
 ///Represents the background or the foreground of the terminal.
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Layer {
-    #[default] Foreground,
+    #[default]
+    Foreground,
     Background,
 }
 
@@ -15,7 +16,8 @@ pub enum Layer {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 #[repr(u32)]
 pub enum AnsiColor {
-    #[default] Reset = 0,
+    #[default]
+    Reset = 0,
     Black = 30,
     Red = 31,
     Green = 32,
@@ -45,7 +47,8 @@ impl AnsiColor {
 pub enum Brightness {
     Bold,
     Dim,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Brightness {
@@ -62,7 +65,8 @@ impl Ansi for Brightness {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Italic {
     Italicized,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Italic {
@@ -78,7 +82,8 @@ impl Ansi for Italic {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Underline {
     Underlined,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Underline {
@@ -94,7 +99,8 @@ impl Ansi for Underline {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Blink {
     Blinking,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Blink {
@@ -110,7 +116,8 @@ impl Ansi for Blink {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Reverse {
     Reversed,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Reverse {
@@ -126,7 +133,8 @@ impl Ansi for Reverse {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Hide {
     Hidden,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Hide {
@@ -142,7 +150,8 @@ impl Ansi for Hide {
 #[derive(Copy, Clone, PartialEq, Eq, Default)]
 pub enum Strikethrough {
     Struck,
-    #[default] Reset,
+    #[default]
+    Reset,
 }
 
 impl Ansi for Strikethrough {
